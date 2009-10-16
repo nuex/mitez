@@ -1,0 +1,16 @@
+body {
+  text-align: center;
+}
+
+#mitez {
+  width: 400px;
+  height: 400px;
+  position: relative;
+}
+
+.mite {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  background-color: #efefef;
+}
