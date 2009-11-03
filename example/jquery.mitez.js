@@ -1,4 +1,4 @@
-(function(){
+(function($){
 
   var temperaments = ['timid', 'fearless', 'drunk'];
   var speeds = ['slow', 'medium', 'fast'];
