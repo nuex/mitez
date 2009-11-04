@@ -132,13 +132,16 @@
      * to selected element(s).
      *
      * $('#mitez').infest(200)
+     #
+     # Infest also accepts an optional second argument
+     # for giving your mites properties and behaviors:
+     # $('#mitez').infest(200, { color: '#F00', behaviors: ['drunk'] })
      *
      */
     infest: function(count, options) {
       if (undefined == count) {
         count = 20
       }
-
       this.each(function(){
         for (var i=0 ; i<count ; i++) {
           var defaults = {num: i}
