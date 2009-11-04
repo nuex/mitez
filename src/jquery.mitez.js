@@ -134,13 +134,16 @@
      * $('#mitez').infest(200)
      *
      */
-    infest: function(count) {
+    infest: function(count, options) {
       if (undefined == count) {
         count = 20
       }
+
       this.each(function(){
         for (var i=0 ; i<count ; i++) {
-          $(this).add_mite({num: i})
+          var defaults = {num: i}
+          var settings = (options ? $.extend(defaults, options) : defaults);
+          $(this).add_mite(settings)
         }
       })
       return this
