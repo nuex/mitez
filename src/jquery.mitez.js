@@ -60,7 +60,6 @@
             }
           }
 
-
           // behaviors is a list of names, b2 is the acutal behavior class
           // 'this' is set by each, copy it into _self
           var _self = this
@@ -127,12 +126,12 @@
   })
 
   $.fn.extend({
-    /** 
+    /**
      * Infest will take a number (default 20)
      * and add that many mites with random behaviors
      * to selected element(s).
      *
-     * $('#mitez').infest(200) 
+     * $('#mitez').infest(200)
      *
      */
     infest: function(count) {
@@ -169,35 +168,5 @@
       return this
     }
   })
-
-  var RainbowMite = {
-    data: {
-      colorwheel: ['#000', '#800', '#F00', '#F88', '#FFF', '#F88', '#F00', '#800'],
-      position: 0
-    },
-
-    update_color: function(mite) {
-      data = mite.data[this]
-      mite.dom.css({background: data.colorwheel[data.position]})
-    },
-
-    onTick: function(mite, evt){
-      console.log("RAINBOW", mite.data[RainbowMite])
-      var data = mite.data[RainbowMite]
-      data.position = (data.position + 1) % data.colorwheel.length
-      RainbowMite.update_color(mite)
-    },
-
-    onBehaviorAdded: function(mite){
-      console.log("ADDED RAINBOW TO", mite)
-    },
-
-    onBringToLife: function(mite) {
-      console.log("RAINBOW IS ALIVE", mite)
-      RainbowMite.update_color(mite)
-    }
-  }
-
-  $.Mite.behaviors.RainbowBehavior = RainbowMite
 
 })(jQuery)
