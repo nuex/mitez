@@ -28,7 +28,6 @@
         dom: null,
 
         react: function(evt) {
-          console.log("REACING TO", evt)
           if(this.stopped){return;}
           var cb_chain = this.callbacks[evt.data.type]
           if (cb_chain) {
