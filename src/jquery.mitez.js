@@ -28,6 +28,7 @@
         dom: null,
 
         react: function(evt) {
+          console.log("REACING TO", evt)
           if(this.stopped){return;}
           var cb_chain = this.callbacks[evt.data.type]
           if (cb_chain) {
@@ -41,7 +42,9 @@
         bind: function(){
           if (this.element) {
             var _self = this
-            this.element.bind('Mite.Tick', {type: 'Tick'}, function(e){_self.react(e)})
+            $.each($.Mite.callbacks, function(){
+              _self.element.bind('Mite.' + this, {type: this}, function(e){_self.react(e)})
+            })
           }
         },
 
