@@ -29,6 +29,11 @@
 
         react: function(evt) {
           if(this.stopped){return;}
+
+          // BringToLife has been triggered, so now the mite can be added
+          // to the DOM
+          if(evt.data.type == 'BringToLife') this.bring_to_life()
+
           var cb_chain = this.callbacks[evt.data.type]
           if (cb_chain) {
             var _self = this
@@ -97,21 +102,13 @@
           })
         },
 
-        bring_to_life: function() {
+        bring_to_life: function(){
           this.dom = $(this.html)
           this.dom.data('mite', this)
           this.element.append(this.dom)
           var tp = Math.floor(Math.random() * this.element.height());
           var lft = Math.floor(Math.random() * this.element.width());
           this.dom.css({top: tp, left: lft})
-
-          var cb_chain = this.callbacks['BringToLife']
-          if (cb_chain) {
-            var _self = this
-            $.each(cb_chain, function() {
-              (this)(_self)
-            })
-          }
         }
       },
 
@@ -121,7 +118,6 @@
         $.extend(mite, opts)
         mite.add_behaviors()
         mite.bind()
-        mite.bring_to_life()
         return mite
       }
     }
@@ -134,10 +130,10 @@
      * to selected element(s).
      *
      * $('#mitez').infest(200)
-     #
-     # Infest also accepts an optional second argument
-     # for giving your mites properties and behaviors:
-     # $('#mitez').infest(200, { color: '#F00', behaviors: ['drunk'] })
+     *
+     * Infest also accepts an optional second argument
+     * for giving your mites properties and behaviors:
+     * $('#mitez').infest(200, { color: '#F00', behaviors: ['drunk'] })
      *
      */
     infest: function(count, options) {
@@ -151,6 +147,7 @@
           $(this).add_mite(settings)
         }
       })
+      this.trigger('Mite.BringToLife')
       return this
     },
 
