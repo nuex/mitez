@@ -29,11 +29,6 @@
 
         react: function(evt) {
           if(this.stopped){return;}
-
-          // BringToLife has been triggered, so now the mite can be added
-          // to the DOM
-          if(evt.data.type == 'BringToLife') this.bring_to_life()
-
           var cb_chain = this.callbacks[evt.data.type]
           if (cb_chain) {
             var _self = this
@@ -102,7 +97,9 @@
           })
         },
 
-        bring_to_life: function(){
+        // this places the mite on the page
+        // XXX maybe infest options could override start position here?
+        spawn: function(){
           this.dom = $(this.html)
           this.dom.data('mite', this)
           this.element.append(this.dom)
@@ -118,6 +115,7 @@
         $.extend(mite, opts)
         mite.add_behaviors()
         mite.bind()
+        mite.spawn()
         return mite
       }
     }
